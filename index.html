@@ -2,9 +2,327 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>yay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flipper Lab</title>
+    <script src="https://bilibili.github.io/flv.js/dist/flv.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            background-size: 30px 30px;
+            background-image:
+                linear-gradient(to right, #124329 2px, transparent 2px),
+                linear-gradient(to bottom, #124329 2px, transparent 2px);
+            background-position: -15px -15px;
+            position: relative;
+        }
+
+        #content {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(8,0,27,1) 100%);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flipper__device {
+            position: relative;
+        }
+
+        .flipper__screen {
+            width: 1200px;
+            max-width: 100%;
+        }
+
+        .flipper__body {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .flipper-lcd {
+          position: absolute;
+          width: 275px;
+          height: 155px;
+          overflow: hidden;
+          background-color: #6a7770;
+        }
+
+        .flipper-lcd video {
+          position: absolute;
+          width: 440px;
+          height: 330px;
+          left: -74px;
+          top: -60px;
+        }
+
+        .pushed {
+            transform: translateY(2px);
+        }
+
+        .tilt-down {
+            transform: translateY(2px);
+        }
+
+        .tilt-up {
+            transform: translateY(-2px);
+        }
+
+        .tilt-left {
+            transform: translateX(-2px);
+        }
+
+        .tilt-right {
+            transform: translateX(2px);
+        }
+
+        .light-green {
+            fill: #dcfb44;
+            transition: fill 200ms ease;
+        }
+
+        .light-red {
+            fill: #fb4466;
+        }
+    </style>
 </head>
 <body>
-    yay
+    <main id="content">
+        <section class="flipper">
+            <div class="flipper__device">
+                <!-- Yep, we need this hack, because chrome so fuck https://bugs.chromium.org/p/chromium/issues/detail?id=148499 -->
+                <svg class="flipper__screen" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 580">
+                    <foreignObject width="275" height="155" x="415" y="165">
+                        <div class="flipper-lcd">
+                            <video width="275" height="155" muted></video>
+                        </div>
+                    </foreignObject>
+                </svg>
+                <svg class="flipper__body" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 580">
+                    <defs>
+                        <linearGradient id="e">
+                            <stop offset="0" stop-color="#bebebe" />
+                            <stop offset=".3" stop-color="#fff" stop-opacity=".99" />
+                            <stop offset=".75" stop-color="#fff" />
+                            <stop offset="1" stop-color="#bebebe" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="d">
+                            <stop offset="0" stop-color="#515151" />
+                            <stop offset=".18" stop-color="#939393" />
+                            <stop offset=".92" stop-color="#939393" />
+                            <stop offset="1" stop-color="#616161" />
+                        </linearGradient>
+                        <linearGradient id="c">
+                            <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                            <stop offset=".44" stop-color="#fff" stop-opacity=".98" />
+                            <stop offset=".56" stop-color="#fff" />
+                            <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="b">
+                            <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                            <stop offset=".31" stop-color="#fff" stop-opacity=".28" />
+                            <stop offset=".37" stop-color="#fff" stop-opacity=".35" />
+                            <stop offset=".62" stop-opacity=".2" />
+                            <stop offset="1" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="a">
+                            <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                            <stop offset=".56" stop-color="#fff" />
+                            <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="h" x1="933.38" x2="994.03" y1="274.12" y2="248.32" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#a" />
+                        <linearGradient id="i" x1="406.53" x2="483.34" y1="147.23" y2="10.67" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#b" />
+                        <linearGradient id="g" x1="363.82" x2="387.22" y1="169.61" y2="278.11" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#c" />
+                        <linearGradient id="f" x1="283.42" x2="992.35" y1="328.16" y2="328.16" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#d" />
+                        <linearGradient id="j" x1="856.05" x2="1013.34" y1="50.64" y2="223.45" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#e" />
+                    </defs>
+                    <path fill="url(#f)" d="M384.03 165.98c-18.95 0-35.66 11-46.22 27.04l-88.31 97.66c-10.2 13.82-3.38 32.2.73 38.19 4.11 5.99 64.23 96.02 66.66 99.27 5.32 7.1 17.7 11.86 27.15 11.86l567.64-.09c42.2-.1 48.64-43.36 48.3-59.67l-1.92-95.54c-.23-11.3-13.58-24.7-13.58-24.7l-68-82.09s-8.06-11.93-33.06-11.93zm45.74 4.34h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" />
+                    <path fill="#bebebe" d="M384.03 140c-18.95 0-35.66 11-46.21 27.04L246.6 286.9c-10.2 13.83-7.5 26.23.73 38.2l57.4 77.06c5.24 6.2 18.41 13.52 27.86 13.5l597.35-1.44c25.5-.06 30.24-15.89 30.01-30.53l-1.93-124.97c-.17-11.3-13.58-24.7-13.58-24.7l-67.95-82.19S868.38 140 843.39 140zm45.74 30.32h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" />
+                    <path fill="url(#g)" d="M419.41 193.97l-102.5.53-70.3 92.4c-10.2 13.83-7.5 26.23.72 38.2l57.4 77.06c5.24 6.2 18.41 13.52 27.86 13.5l161.35-.4 82.65-99.9H429.77a10.28 10.28 0 01-10.36-10.26z" opacity=".44" />
+                    <path fill="url(#h)" d="M918.47 202.6l-160.84 67.57 104.2 144.21 68.11-.16c25.5-.06 30.24-15.89 30.01-30.53l-1.93-124.97c-.17-11.3-13.58-24.7-13.58-24.7z" opacity=".47" />
+                    <path fill="url(#i)" d="M384.03 140c-18.95 0-35.66 11-46.21 27.04l-25.68 33.74 107.27 103.49v-123.7c0-5.68 4.62-10.25 10.36-10.25h244.38c5.74 0 10.36 4.57 10.36 10.25v17.73L801.48 140zm46.87 175.35l6.39 6.16 12.34-6.16z" opacity=".32" />
+                    <path fill="url(#j)" d="M654.82 140l-19.35 30.32h38.68c5.74 0 10.36 4.57 10.36 10.25v105.6l219.52 43.7 55.12 1.54-1.13-72.69c-.17-11.3-13.58-24.7-13.58-24.7l-67.95-82.19S868.38 140 843.39 140z" opacity=".54" />
+                    <path fill="#e8e8e8" d="M433.4 148.02c-18.94 0-29.8 11-40.36 27.04l-66.22 104.48c-10.2 13.83-10.85 18.77.73 30.22l35.36 36.84c5.24 6.21 9.6 7.07 19.06 7.07l532.1-1.43c25.5-.07 28.48-13.89 27.99-28.52l-1.93-56.98c-.38-11.29-11.55-24.7-11.55-24.7l-67.96-82.18s-8.1-11.84-33.1-11.84zm-3.63 22.3h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" opacity=".9" />
+                    <path fill="#e4e4e4" d="M789.77 159.82c-44.8 0-81.11 34.32-81.11 76.66 0 42.34 36.31 76.66 81.11 76.66s107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.15-67.52-34.15z" />
+                    <path fill="#d9d8d6" stroke="#c6c5c3" stroke-width="5.11" d="M789.77 162.92c-44.8 0-81.11 34.33-81.11 76.67s36.31 76.66 81.11 76.66 107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.16-67.52-34.16z" />
+                    <path fill="#e4e4e4" d="M789.77 164.58c-44.8 0-81.11 34.33-81.11 76.67s36.31 76.66 81.11 76.66 107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.16-67.52-34.16z" />
+                    <ellipse cx="789.77" cy="240.71" fill="#9f582e" stroke="#9f582e" stroke-width="3.5" rx="77.59" ry="73.33" />
+
+                    <g id="flipper-disc-navigator">
+                        <path fill="#e8853e" d="M789.77 167.6a76.71 72.5 0 00-76.71 72.5 76.71 72.5 0 0076.71 72.51 76.71 72.5 0 0076.72-72.5 76.71 72.5 0 00-76.72-72.5zm0 46.35a25.96 24.53 0 0125.96 24.53 25.96 24.53 0 01-25.96 24.54 25.96 24.53 0 01-25.95-24.54 25.96 24.53 0 0125.95-24.53z" />
+                        <g id="flipper-down-button">
+                            <path fill="#e8853e" d="M806.24 262.35a31.45 31.45 0 01-29.48 1.85 30.65 30.65 0 01-4.06-2.25l-30.34 30.03a75 75 0 0043.57 16.52 77.04 77.04 0 0032.74-5.55 73.27 73.27 0 0018.53-10.96l-30.35-30.04-.61.4z" />
+                            <path fill="#9f582e" fill-opacity=".5" d="M789.77 302.8c.54 0 1.03-.29 1.3-.74L803.25 282c.6-1-.12-2.28-1.3-2.28H777.6a1.5 1.5 0 00-1.3 2.28l12.16 20.06c.27.45.77.73 1.3.73z" />
+                            <path fill="#e8853e" d="M802.3 280.27c.07.13.08.25-.01.41l-12.17 20.06c-.07.13-.2.2-.35.2a.41.41 0 01-.36-.2l-12.16-20.06c-.2-.32-.02-.62.36-.62h24.32c.2 0 .29.08.36.2z"  />
+                        </g>
+                        <g id="flipper-up-button">
+                            <path fill="#e8853e" d="M789.1 171.62c-15.7.13-31.4 5.16-43.99 14.5l28.59 28.28a31.27 31.27 0 0132.15 0l28.6-28.3a75.23 75.23 0 00-44.14-14.48h-1.21z" />
+                            <path fill="#9f582e" fill-opacity=".5" d="M789.77 177.43c.54 0 1.03.28 1.3.73l12.17 20.06c.6 1-.12 2.28-1.3 2.28H777.6a1.5 1.5 0 01-1.3-2.28l12.16-20.06c.27-.45.77-.73 1.3-.73z" />
+                            <path fill="#e8853e" d="M802.3 198.44a.37.37 0 000-.42l-12.17-20.06a.41.41 0 00-.36-.2.41.41 0 00-.35.2l-12.17 20.06c-.2.32-.02.62.36.62h24.33c.19 0 .28-.08.36-.2z" />
+                        </g>
+                        <g id="flipper-right-button">
+                            <path fill="#e8853e" d="M813.76 221.33a27.54 27.54 0 014.9 24.94 27.96 27.96 0 01-4.22 8.44l30.4 30.08a67.9 67.9 0 0011.98-18.3 64.94 64.94 0 003.78-41.65 67.37 67.37 0 00-18.16-31.9l-28.68 28.39z" />
+                            <path fill="#9f582e" fill-opacity=".5" d="M853.12 240.11a1.5 1.5 0 00-.74-1.3l-20.27-12.03c-1.01-.6-2.3.13-2.3 1.3v24.06c0 1.17 1.29 1.9 2.3 1.3l20.27-12.04c.46-.27.74-.76.74-1.29z" />
+                            <path fill="#e8853e" d="M831.12 226.96c.13-.07.26-.09.42 0L851.81 239c.13.08.2.2.2.35a.4.4 0 01-.2.36l-20.27 12.03c-.32.2-.63.02-.63-.35v-24.07c0-.19.08-.29.21-.36z" />
+                        </g>
+                        <g id="flipper-left-button">
+                            <path fill="#e8853e" d="M736.58 193.46a66.46 66.46 0 00-19.46 46.41 65.86 65.86 0 0012.74 38.97 68.52 68.52 0 004.85 5.95l30.4-30.08a27.3 27.3 0 01-4.64-22.35c.93-4 2.74-7.8 5.32-11.03l-28.69-28.39-.52.52z" />
+                            <path fill="#9f582e" fill-opacity=".5" d="M726.42 240.11c0-.53.28-1.02.74-1.3l20.27-12.03c1.02-.6 2.3.13 2.3 1.3v24.06c0 1.17-1.28 1.9-2.3 1.3l-20.27-12.04a1.5 1.5 0 01-.74-1.29z" />
+                            <path fill="#e8853e" d="M748.42 226.96a.38.38 0 00-.42 0L727.73 239a.4.4 0 00-.2.35c0 .15.08.28.2.36L748 251.74c.33.2.63.02.63-.35v-24.07a.36.36 0 00-.2-.36z" />
+                        </g>
+                    </g>
+
+                    <ellipse cx="789.77" cy="239.89" fill="#804a2a" rx="21.78" ry="20.59" />
+                    <g id="flipper-enter-button">
+                        <ellipse cx="789.77" cy="236.43" fill="#e89e3e" rx="21.78" ry="20.59" />
+                        <ellipse cx="789.77" cy="237.68" fill="#e8853e" rx="21.78" ry="20.59" />
+                    </g>
+                    <g>
+                        <ellipse cx="715.16" cy="312.7" fill="#c6c5c3" rx="5.39" ry="5.33" />
+                        <ellipse id="flipper-led" class="light-green" cx="715.16" cy="312.7" fill="#dcfb44" rx="4.57" ry="4.53" />
+                        <path fill-opacity=".5" d="M715.16 308.18a4.57 4.53 0 00-4.57 4.52 4.57 4.53 0 00.01.38 4.57 4.53 0 014.56-4.15 4.57 4.53 0 014.56 4.15 4.57 4.53 0 00.02-.38 4.57 4.53 0 00-4.58-4.52z" />
+                    </g>
+                    <g>
+                        <path fill="#c6c5c3" d="M429.77 160.44c-10.6 0-19.43 8.74-19.43 19.23V302.2c0 10.5 8.82 19.23 19.43 19.23h244.38c10.6 0 19.43-8.73 19.43-19.23V179.67c0-10.5-8.82-19.23-19.43-19.23zm0 9.88h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" />
+                        <path fill="#d9d8d6" d="M429.77 163.8c-9.27 0-16.95 7.6-16.95 16.77V303.1c0 9.17 7.68 16.77 16.95 16.77h244.38c9.27 0 16.95-7.6 16.95-16.77V180.57c0-9.17-7.68-16.77-16.95-16.77zm0 6.52h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" />
+                        <path fill-opacity=".2" d="M429.77 170.32a10.29 10.29 0 00-10.36 10.26V305.1c0 5.68 4.62 10.26 10.36 10.26h244.38c5.74 0 10.36-4.58 10.36-10.26V180.58c0-5.68-4.62-10.26-10.36-10.26zm242.26 4c1.17 0 2.34 0 3.5.13 3.8.55 6.87 4 6.94 7.78.03 39.24 0 78.47.01 117.7-.06 2.19.14 4.39-.11 6.56a8.3 8.3 0 01-7.92 6.85c-79.65.02-159.3 0-238.96.01-2.33-.06-4.69.12-7.02-.1a8.28 8.28 0 01-7.02-7.8c-.03-39.2 0-78.4-.01-117.6.06-2.22-.13-4.45.12-6.65a8.3 8.3 0 017.76-6.85l.3-.01h238.9c1.17.02 2.34 0 3.51-.02z" />
+                    </g>
+                    <g>
+                        <path fill="#ce7024" d="M690.5 379.66l-.46.96-.99.28h-31.87l.53-3.77h31.88l.9.28.16.96zm6.9-7.37c-.82-.97-2.25-1.45-4.3-1.45H651.3l-3.73 26.37h7.31l1.41-10.02h34.47c2.06 0 3.63-.48 4.72-1.45 1.1-.97 1.78-2.43 2.06-4.39l.65-4.67c.28-1.96 0-3.43-.8-4.4zM639.7 379.66l-.46.96-1 .28h-31.87l.54-3.77h31.87l.9.28.17.96zm6.89-7.37c-.81-.97-2.25-1.45-4.3-1.45H600.5l-3.74 26.37h7.32l1.4-10.02h34.47c2.06 0 3.63-.48 4.72-1.45 1.1-.97 1.78-2.43 2.06-4.39l.65-4.67c.28-1.96.01-3.43-.8-4.4zM791.96 379.66l-.44.96-1 .28h-32.04l.54-3.77h32.03l.91.28.15.96zm6.99-7.47c-.77-.9-2.17-1.35-4.17-1.35h-42.16l-3.73 26.37h7.3l1.42-10.05h31.72c1 0 1.44.5 1.33 1.54l-1.21 8.51h7.31l1.03-7.27.08-2.18-.54-1.8-1.33-1.25-2.29-.65c1.8-.12 3.14-.61 4-1.46a6.57 6.57 0 001.68-3.81l.3-2.3c.28-1.96.04-3.4-.74-4.3zM749.1 370.84h-46.98l-3.73 26.38h46.99l.87-6.3h-39.67l.52-3.77h35.88l.87-6.25h-35.88l.55-3.76h39.69zM585.2 397.22h7.31l3.73-26.38h-7.32zM583.2 390.92h-39.14l2.86-20.08h-7.32l-3.73 26.38h46.47zM531.5 380.9h-35.65l.52-3.76h39.47l.9-6.3h-46.76l-3.73 26.38h7.32l1.41-10.02h35.64z" />
+                        <path fill-opacity=".17" d="M600.5 370.84l-3.73 26.38h2.32l3.44-24.38h41.78c1.15 0 2.1.16 2.86.46a3.5 3.5 0 00-.58-1.01c-.81-.97-2.25-1.45-4.3-1.45zm50.81 0l-3.73 26.38h2.31l3.45-24.38h41.78c1.15 0 2.1.16 2.85.46a3.5 3.5 0 00-.58-1.01c-.8-.97-2.24-1.45-4.3-1.45zm101.3 0l-3.72 26.38h2.3l3.46-24.38h42.16c1.09 0 2 .14 2.72.41-.14-.4-.33-.76-.58-1.06-.77-.9-2.17-1.35-4.17-1.35zm-262.63 0l-3.73 26.38h2.31l3.45-24.38h44.45l.3-2zm49.63 0l-3.73 26.38h2.3l3.45-24.38h5l.29-2zm49.32 0l-3.74 26.38h2.31l3.45-24.38h5l.29-2zm113.19 0l-3.74 26.38h2.31l3.46-24.38h44.67l.3-2zm-62.36 8.3l-.06.52-.46.96-1 .28h-31.87l2.03 2h31.88l.98-.28.46-.96.15-1.28-.17-.96-.89-.28zm50.9-.76l-.16 1.28-.46.96-.99.28H659.5l-.29 2h31.88l1-.28.45-.96.15-1.28-.17-.96-2.03-2zm101.45 0l-.15 1.28-.43.96-1.01.28h-32.04l2.03 2h32.03l1.01-.28.44-.96.15-1.28-.15-.96-2.03-2zm-296.26 2.52l2.02 2h33.35l.28-2zm212.13 0l2.03 2h33.57l.28-2zm82.62 8.26l-1.15 8.06h2.31l.93-6.51c.1-1.03-2.07-2.82-2.07-2.82l.05.28.01.37zm-84.03 1.76l2.03 2h37.38l.28-2zm-162.5 0l2.02 2h36.85l.27-2z" />
+                    </g>
+                    <g>
+                        <ellipse cx="897.1" cy="289.55" fill="#9f582e" rx="25.49" ry="25.22" />
+                        <g id="flipper-back-button">
+                            <path fill="#e89e3e" d="M920.28 288.78c0 12.67-10.38 22.94-23.18 22.94-12.8 0-23.19-10.27-23.19-22.94 0-12.67 10.38-22.94 23.19-22.94 12.8 0 23.18 10.27 23.18 22.94z" />
+                            <path fill="#e8853e" d="M920.28 288.78c0 12.67-10.38 22.94-23.18 22.94-12.8 0-23.19-10.27-23.19-22.94 0-12.67 10.38-21.42 23.19-21.42 12.8 0 23.18 8.75 23.18 21.42z" />
+                            <path fill="#9f582e" fill-opacity=".8" d="M892.77 275.25c-.3 0-.58.09-.83.25l-9.12 6.02c-.9.6-.9 1.9 0 2.5l9.12 6.02a1.52 1.52 0 002.37-1.25v-4.01h8.1a5.49 5.49 0 015.58 5.51c0 3.1-2.45 5.52-5.57 5.52h-7.6c-1.12 0-2.03.9-2.03 2a2.02 2.02 0 002.07 2h7.56a9.6 9.6 0 009.63-9.52 9.6 9.6 0 00-9.63-9.53h-8.11v-4c0-.84-.7-1.52-1.54-1.51z" />
+                            <path fill="#e8853e" fill-opacity=".7" d="M893.17 276.65a.5.5 0 00-.27.08l-9.12 6.02c-.32.2-.32.6 0 .8l9.12 6.02c.37.25.76.04.76-.4v-4.01a1.03 1.02 0 011.03-1.02h8.11c3.67 0 6.6 2.9 6.6 6.53a6.55 6.55 0 01-6.6 6.54h-7.6c-.56 0-1 .43-1 .98 0 .56.44.99 1 .99a1.03 1.02 0 01.01 0h.03a1.03 1.02 0 01.01 0h7.55c4.74 0 8.6-3.82 8.6-8.5 0-4.7-3.86-8.52-8.6-8.52h-8.1a1.03 1.02 0 01-1.04-1.02v-4c0-.29-.2-.5-.49-.5z" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        // Display
+        const reset = function() {
+          if (typeof player !== "undefined") {
+            if (player != null) {
+              player.unload();
+              player.detachMediaElement();
+              player.destroy();
+              player = null;
+            }
+          }
+
+          player = flvjs.createPlayer({
+            type: 'flv',
+            url: 'http://lab.flipperzero.one:8080/live?port=1985&app=myapp&stream=randomname',
+          },{
+            enableWorker: false,
+            lazyLoadMaxDuration: 3 * 60,
+            seekType: 'range',
+          });
+
+          player.attachMediaElement(document.querySelector('.flipper-lcd video'));
+          player.load();
+          player.play();
+        }
+
+        reset();
+        document.addEventListener('visibilitychange', reset);
+
+
+        // LED
+        const ledEl = document.querySelector('#flipper-led');
+        let ledTimeout;
+
+        const blinkLed = function() {
+            ledEl.classList.remove('light-green');
+            ledEl.classList.add('light-red');
+            clearTimeout(ledTimeout);
+            ledTimeout = setTimeout(() => {
+                ledEl.classList.remove('light-red');
+                ledEl.classList.add('light-green');
+            }, 100);
+        }
+
+
+        // Buttons
+        const pushState = function(target) {
+            target.classList.add('pushed');
+        }
+
+        const tiltState = function(target, side) {
+            target.classList.add('tilt-' + side);
+        }
+
+        const cleanState = function(target) {
+            target.classList.remove('pushed', 'tilt-up', 'tilt-down', 'tilt-left', 'tilt-right');
+        }
+
+
+        const pushButtons = {};
+
+        ['back', 'enter'].forEach(function(action) {
+            pushButtons[action] = document.querySelector(`#flipper-${action}-button`);
+
+            pushButtons[action].addEventListener('click', function() {
+                blinkLed();
+                console.log(`Pushed ${action}!`);
+            })
+
+            pushButtons[action].addEventListener('mousedown', () => {
+                pushState(pushButtons[action]);
+            });
+
+            ['mouseup', 'mouseout'].forEach(function(event) {
+                pushButtons[action].addEventListener(event, () => {
+                    cleanState(pushButtons[action]);
+                });
+            })
+        })
+
+
+        const discNavigator = document.querySelector('#flipper-disc-navigator');
+        const discNavigatorButtons = {};
+
+        ['up', 'right', 'down', 'left'].forEach(function(side) {
+            discNavigatorButtons[side] = document.querySelector(`#flipper-${side}-button`);
+
+             discNavigatorButtons[side].addEventListener('click', function() {
+                blinkLed();
+                console.log(`Move ${side}!`);
+            })
+
+             discNavigatorButtons[side].addEventListener('mousedown', () => {
+                tiltState(discNavigator, side);
+            });
+
+            ['mouseup', 'mouseout'].forEach(function(event) {
+                 discNavigatorButtons[side].addEventListener(event, () => {
+                    cleanState(discNavigator);
+                });
+            })
+
+        })
+    </script>
 </body>
 </html>
