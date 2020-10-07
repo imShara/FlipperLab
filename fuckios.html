@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fuck iOS</title>
+    <script src="http://bilibili.github.io/flv.js/dist/flv.js"></script>
+</head>
+<body>
+    <video id="flipper-lcd" muted></video>
+
+    <script>
+        var element = document.querySelector('#flipper-lcd');
+
+        function reset() {
+          if (typeof player !== "undefined") {
+            if (player != null) {
+              player.unload();
+              player.detachMediaElement();
+              player.destroy();
+              player = null;
+            }
+          }
+          player = flvjs.createPlayer({
+            type: 'flv',
+            url: 'https://lab.flipperzero.one:8080/live?port=1985&app=myapp&stream=randomname',
+          },
+                                      {
+            enableWorker: false,
+            lazyLoadMaxDuration: 3 * 60,
+            seekType: 'range',
+          });
+          player.attachMediaElement(element);
+          player.load();
+          player.play();
+        }
+        reset();
+
+
+        document.addEventListener('visibilitychange', reset);
+    </script>
+</body>
+</html>
