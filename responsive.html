@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#08001b">
+    <title>Flipper Lab</title>
+    <script src="https://bilibili.github.io/flv.js/dist/flv.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Born2bSportyV2';
+            src: url('Born2bSportyV2.woff2') format('woff2'),
+                url('Born2bSportyV2.woff') format('woff'),
+                url('Born2bSportyV2.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 900px), screen and (max-height: 800px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            background-size: 30px 30px;
+            background-image:
+                linear-gradient(to right, #124329 2px, transparent 2px),
+                linear-gradient(to bottom, #124329 2px, transparent 2px);
+            background-position: -15px -15px;
+            position: relative;
+            font-family: 'Born2bSportyV2';
+            font-weight: 500;
+        }
+
+        input, button {
+            font-family: 'Born2bSportyV2';
+            font-weight: 500;
+            font-style: normal;
+            font-size: 16px;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(8,0,27,1) 100%);
+            display: flex;
+            flex-flow: column;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .content__title {
+            color: #fff;
+            font-size: 4rem;
+            line-height: 1;
+            text-align: center;
+            font-weight: 500;
+            /*background: blue;*/
+            padding: 4rem;
+        }
+
+        @media screen and (max-width: 1440px), screen and (max-height: 900px) {
+            .content__title {
+                font-size: 3rem;
+                padding: 2rem;
+            }
+        }
+
+
+        .flipper {
+            /*background: red;*/
+            width: 100%;
+
+            min-height: 0;
+            flex-shrink: 1;
+        }
+
+            .flipper__container {
+                width: 1200px;
+                max-height: 580px;
+                height: 100%;
+            }
+
+            .flipper__decoration {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+
+            .flipper__decoration__svg {
+                width: 100%;
+                height: 100%;
+                /*filter: drop-shadow(0 2px 10px rgba(0,0,0,1));*/
+            }
+
+
+
+
+
+
+
+
+
+            .flipper__body {
+                /*display: none;*/
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .flipper__body__svg {
+                /*background: #0000ff55;*/
+
+                width: 60%; /*720/1200*/
+                height: 51.724%; /*300/580*/
+
+                position: absolute;
+                left: 20%; /*240/1200*/
+                top: 29.310%; /*170/580*/
+
+                /*transform: translate(50%, 50%);*/
+            }
+
+
+
+
+            .flipper__interface {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .flipper__interface__container {
+                width: 47.333%; /* 520/1200 */
+                height: 27.931%; /* 162/580 */
+                /*background: #00ff0055;*/
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .flipper__interface__svg {
+                /*background: #ff000055;*/
+                max-width: 100%;
+                height: 100%;
+                transform: translate(13%,-12%);
+            }
+/*
+            .flipper__interface__g {
+                transform: translate(60px,0);
+            }*/
+
+            .flipper__screen {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .flipper__screen__container {
+                /*background: #00ff0055;*/
+                position: absolute;
+                width: 22.333%; /* 268/1200 */
+                height: 25.517%; /* 148/580 */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .flipper__screen__svg {
+              /*background: #ff000055;*/
+              max-width: 100%;
+              height: 100%;
+              background-color: #6a7770;
+              transform: translate(-18%,-12%); /* Shift center */
+            }
+
+            .flipper-lcd video {
+              position: absolute;
+              width: 440px;
+              height: 330px;
+              left: -74px;
+              top: -65px;
+            }
+
+
+
+/*        
+            .flipper__decoration {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                filter: drop-shadow(0 2px 10px rgba(0,0,0,1));
+                width: 100%;
+                height: 100%;
+            }*/
+
+
+            @media screen and (max-width: 1200px) {
+                .flipper__container {
+                    max-width: 100%;
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .console {
+            max-width: 1200px;
+            width: 100%;
+            padding: 1rem 4rem 4rem;
+            display: flex;
+            flex-flow: column;
+            /*background: purple;*/
+            min-height: 400px;
+            flex: 1;
+        }
+
+
+
+
+            .console__title {
+                color: #fff;
+                font-size: 2rem;
+                line-height: 1;
+                margin-bottom: 1rem;
+                font-weight: 500;
+                text-align: left;
+            }
+
+            .console__body {
+                background: red;
+                overflow-y: scroll;
+                flex: 1;
+            }
+
+            .messages {
+                /*padding: 10px;*/
+            }
+
+            .message {
+                color: #f9f9f9;
+                font-family: monospace;
+                font-size: 1rem;
+                margin: .5rem .75rem;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .pushed {
+            transform: translateY(2px);
+        }
+
+        .tilt-down {
+            transform: translateY(2px);
+        }
+
+        .tilt-up {
+            transform: translateY(-2px);
+        }
+
+        .tilt-left {
+            transform: translateX(-2px);
+        }
+
+        .tilt-right {
+            transform: translateX(2px);
+        }
+
+        .light-green {
+            fill: #dcfb44;
+            transition: fill 200ms ease;
+        }
+
+        .light-red {
+            fill: #fb4466;
+        }
+        .flipper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+.console__actionbar {
+  background: rgba(0,0,0,.8);
+  border: 2px solid #2b8949;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+}
+
+.console__actionbar__separator {
+    flex: 1;
+}
+
+.filters {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+.filters__checkbox {
+  text-transform: uppercase;
+  margin-left: 20px;
+  display: flex;
+  position: relative;
+}
+
+.filters__checkbox input {
+  display: block;
+  position: relative;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.filters__checkbox label {
+  font-size: 1.75rem;
+  white-space: nowrap;
+  display: flex;
+}
+
+.filters__checkbox label::before {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-width: 2px;
+    border-style: solid;
+    box-sizing: border-box;
+    margin-right: 1rem;
+}
+
+.filters__checkbox input:checked + label::after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: .5rem;
+}
+
+.message--event {
+    color: #2b8949;
+}
+
+.message--uart,
+.label--uart {
+  color: #cb53aa;
+}
+.label--uart::after {
+  background-color: #cb53aa;
+}
+.label--uart::before {
+  border-color: #cb53aa;
+}
+
+.message--dmesg,
+.label--dmesg {
+  color: #48aec2;
+}
+.label--dmesg::after {
+  background-color: #48aec2;
+}
+.label--dmesg::before {
+  border-color: #48aec2;
+}
+
+.message--st-link,
+.label--st-link {
+  color: #de7c31;
+}
+.label--st-link::after {
+  background-color: #de7c31;
+}
+
+.label--st-link::before {
+  border-color: #de7c31;
+}
+
+.message--input,
+.label--input {
+  color: #6036b9;
+}
+.label--input::after {
+  background-color: #6036b9;
+}
+.label--input::before {
+  border-color: #6036b9;
+}
+
+
+
+.filters__title {
+  color: #f9f9f9;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.console__body {
+  background: rgba(0,0,0,.8);
+  border: 2px solid #f9f9f9;
+  flex: 1;
+  min-height: 200px;
+}
+
+.console__input {
+  background: rgba(0,0,0,.8);
+  border: 2px solid #2b8949;
+  border-top: none;
+  display: flex;
+}
+
+.console__input__input-text {
+    flex: 1;
+    display: block;
+    background: transparent;
+    border: none;
+    color: #f9f9f9;
+    padding: 10px;
+}
+
+.console__input__input-button {
+    display: block;
+    background: transparent;
+    border: none;
+    border-left: 2px solid #f9f9f9;
+    color: #f9f9f9;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+    .fullscreen-toggle {
+        display: block;
+        border: none;
+        width: 4rem;
+        height: 4rem;
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath fill='white' d='M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z'/%3E%3C/svg%3E") center no-repeat;
+        background-size: 3rem;
+        opacity: .2;
+    }
+
+    .fullscreen-toggle--active {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath fill='white' d='M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z'/%3E%3C/svg%3E") center no-repeat;
+    }
+
+
+
+
+
+
+/* Flipper Body Only */
+@media screen and (max-width: 1000px), screen and (max-height: 480px) {
+    .flipper__container {
+        padding: 3rem;
+    }
+
+    .flipper__decoration__svg {
+        display: none;
+    }
+
+    .flipper__body {
+        position: relative;
+    }
+
+    .flipper__body__svg {
+        width: 100%;
+        height: 100%; 
+
+        position: relative;
+        left: 0;
+        top: 0;
+    }
+
+    .flipper__interface__container {
+        width: 72.222%; /* 520/720 */
+        height: 54%; /* 162/300 */
+    }
+
+    .flipper__interface__svg {
+        transform: translate(13%,-30%);
+    }
+
+    .flipper__screen__container {
+        position: absolute;
+        width: 37.222%; /* 268/720 */
+        height: 49.333%; /* 148/300 */
+    }
+
+    .flipper__screen__svg {
+      transform: translate(-18%,-33%); /* Shift center */
+    }
+}
+
+
+@media screen and (max-width: 1440px), screen and (max-height: 700px) {
+    .console {
+        padding: 1rem 2rem 2rem;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-height: 600px) {
+    .console {
+        display: none;
+    }
+}
+
+
+
+/* Flipper Interface Only */
+@media screen and (max-width: 600px) {
+    .fullscreen-toggle {
+        position: relative;
+        width: 4rem;
+        height: 4rem;
+        background-size: 24px;
+        padding: 0;
+        opacity: 1;
+    }
+
+    body {
+        background: #000;
+    }
+
+    .flipper {
+        background: #eee;
+    }
+
+    .flipper__container {
+        padding: 3rem 2rem;
+    }
+
+    .flipper__decoration__svg {
+        display: none;
+    }
+
+    .flipper__body {
+        position: relative;
+    }
+
+    .flipper__body__svg {
+        display: none;
+    }
+
+    .flipper__interface {
+        position: relative;
+    }
+
+    .flipper__interface__container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .flipper__interface__svg {
+        transform: none;
+        position: relative;
+    }
+
+    .flipper__screen__container {
+        position: absolute;
+        width: 51.538%; /* 268/520 */
+        height: 91.358%; /* 148/162 */
+    }
+
+    .flipper__screen__svg {
+      transform: translate(-43%,0); /* Shift center */
+    }
+}
+
+
+/* Mobile view*/
+@media screen and (max-width: 600px) {
+    .content {
+        flex-flow: column-reverse;
+        background: none;
+    }
+
+    .console {
+        padding: 0;
+    }
+
+    .console__input,
+    .console__actionbar {
+        border: none;
+    }
+
+    .console__body {
+        border-left: none;
+        border-right: none;
+    }
+
+    .console__input__input-button,
+    .console__title {
+        display: none;
+    }
+
+    .filters__checkbox input:checked + label::after,
+    .filters__checkbox label::before {
+        display: none;
+    }
+
+    .filters__checkbox input:not(:checked) + label {
+        color: #fff;
+        opacity: .25;
+    }
+}
+
+
+
+
+
+
+@media screen and (max-width: 480px) {
+    .filters {
+        padding: 0;
+    }
+
+    .filters__title {
+        display: none;
+    }
+}
+
+
+
+@media screen and (max-height: 900px), screen and (max-width: 1000px) {
+    .content__title {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <main class="content">
+        <h1 class="content__title">Flipper Lab</h1>
+        <section class="flipper">
+            <div class="flipper__container">
+                <div class="flipper__decoration">
+                    <svg class="flipper__decoration__svg" xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
+                        <path fill="#2b8949" d="M107 85v95H20v25h4v-21h172v21h4v-25h-87V91h134v-6zm846 0v6h134v89h-87v25h4v-21h172v21h4v-25h-87V85zM20 435v25h87v95h260v-6H113v-89h87v-25h-4v21H24v-21zm980 0v25h87v89H833v6h260v-95h87v-25h-4v21h-172v-21z" /><text x="431.13" y="32.5" fill="#f9f9f9" font-family="Born2bSportyV2" font-size="28" letter-spacing="0" style="line-height:1;-inkscape-font-specification:Born2bSportyV2" word-spacing="0">
+                            <tspan x="431.13" y="32.5" style="text-align:center" text-anchor="middle">Watch real screen from</tspan>
+                            <tspan x="431.13" y="60.5" style="text-align:center" text-anchor="middle">our live stand</tspan>
+                        </text><text x="789.13" y="34.25" fill="#f9f9f9" font-family="Born2bSportyV2" font-size="28" letter-spacing="0" style="line-height:1;-inkscape-font-specification:Born2bSportyV2" word-spacing="0">
+                            <tspan x="789.13" y="34.25" style="text-align:center" text-anchor="middle">Control Flipper&apos;s buttons and</tspan>
+                            <tspan x="789.13" y="62.25" style="text-align:center" text-anchor="middle">D-pad from your keyboard</tspan>
+                        </text><text x="395.25" y="559" fill="#f9f9f9" font-family="Born2bSportyV2" font-size="28" letter-spacing="0" style="line-height:1;-inkscape-font-specification:Born2bSportyV2;text-align:start" word-spacing="0">
+                            <tspan x="395.25" y="559" style="text-align:start">Upload your-own code</tspan>
+                        </text>
+                        <path fill="#f9f9f9" d="M788 85h4v60h-4zM430 85h4v60h-4z" paint-order="stroke fill markers" />
+                        <path fill="#ce7024" stroke="#fff" stroke-width="8" d="M660 537h139v30H660z" paint-order="stroke fill markers" /><text x="692.38" y="557.75" fill="#f9f9f9" font-family="Born2bSportyV2" font-size="22" letter-spacing="0" style="line-height:1;-inkscape-font-specification:Born2bSportyV2;text-align:start" word-spacing="0">
+                            <tspan x="692.38" y="557.75" style="text-align:start">Open File</tspan>
+                        </text></svg>
+                    <div class="flipper__body">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="flipper__body__svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 300">
+                            <defs>
+                                <linearGradient id="e">
+                                    <stop offset="0" stop-color="#bebebe" />
+                                    <stop offset=".3" stop-color="#fff" stop-opacity=".99" />
+                                    <stop offset=".75" stop-color="#fff" />
+                                    <stop offset="1" stop-color="#bebebe" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="d">
+                                    <stop offset="0" stop-color="#515151" />
+                                    <stop offset=".18" stop-color="#939393" />
+                                    <stop offset=".92" stop-color="#939393" />
+                                    <stop offset="1" stop-color="#616161" />
+                                </linearGradient>
+                                <linearGradient id="c">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                                    <stop offset=".44" stop-color="#fff" stop-opacity=".98" />
+                                    <stop offset=".56" stop-color="#fff" />
+                                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="b">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                                    <stop offset=".31" stop-color="#fff" stop-opacity=".28" />
+                                    <stop offset=".37" stop-color="#fff" stop-opacity=".35" />
+                                    <stop offset=".62" stop-opacity=".2" />
+                                    <stop offset="1" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="a">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0" />
+                                    <stop offset=".56" stop-color="#fff" />
+                                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="h" x1="933.38" x2="994.03" y1="274.12" y2="248.32" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#a" />
+                                <linearGradient id="i" x1="406.53" x2="483.34" y1="147.23" y2="10.67" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#b" />
+                                <linearGradient id="g" x1="363.82" x2="387.22" y1="169.61" y2="278.11" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#c" />
+                                <linearGradient id="f" x1="283.42" x2="992.35" y1="328.16" y2="328.16" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#d" />
+                                <linearGradient id="j" x1="856.05" x2="1013.34" y1="50.64" y2="223.45" gradientTransform="matrix(1.01356 0 0 1.0029 -46.3 72.65)" gradientUnits="userSpaceOnUse" xlink:href="#e" />
+                            </defs>
+                            <path fill="url(#f)" d="M384.03 165.98c-18.95 0-35.66 11-46.22 27.04l-88.31 97.66c-10.2 13.82-3.38 32.2.73 38.19 4.11 5.99 64.23 96.02 66.66 99.27 5.32 7.1 17.7 11.86 27.15 11.86l567.64-.09c42.2-.1 48.64-43.36 48.3-59.67l-1.92-95.54c-.23-11.3-13.58-24.7-13.58-24.7l-68-82.09s-8.06-11.93-33.06-11.93zm45.74 4.34h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" transform="translate(-240 -140)" />
+                            <path fill="#bebebe" d="M144.04 0c-18.95 0-35.66 11-46.21 27.04L6.6 146.9c-10.2 13.83-7.5 26.23.73 38.2l57.4 77.06c5.24 6.2 18.4 13.52 27.86 13.5l597.35-1.44c25.5-.06 30.24-15.89 30-30.53l-1.92-124.97c-.17-11.3-13.58-24.7-13.58-24.7L636.5 11.83S628.39 0 603.4 0zm45.74 30.32h244.38c5.74 0 10.36 4.57 10.36 10.25V165.1c0 5.68-4.62 10.25-10.36 10.25H189.78a10.28 10.28 0 01-10.36-10.25V40.57c0-5.68 4.62-10.25 10.36-10.25z" />
+                            <path fill="url(#g)" d="M419.41 193.97l-102.5.53-70.3 92.4c-10.2 13.83-7.5 26.23.72 38.2l57.4 77.06c5.24 6.2 18.41 13.52 27.86 13.5l161.35-.4 82.65-99.9H429.77a10.28 10.28 0 01-10.36-10.26z" opacity=".44" transform="translate(-240 -140)" />
+                            <path fill="url(#h)" d="M918.47 202.6l-160.84 67.57 104.2 144.21 68.11-.16c25.5-.06 30.24-15.89 30.01-30.53l-1.93-124.97c-.17-11.3-13.58-24.7-13.58-24.7z" opacity=".47" transform="translate(-240 -140)" />
+                            <path fill="url(#i)" d="M384.03 140c-18.95 0-35.66 11-46.21 27.04l-25.68 33.74 107.27 103.49v-123.7c0-5.68 4.62-10.25 10.36-10.25h244.38c5.74 0 10.36 4.57 10.36 10.25v17.73L801.48 140zm46.87 175.35l6.39 6.16 12.34-6.16z" opacity=".32" transform="translate(-240 -140)" />
+                            <path fill="url(#j)" d="M654.82 140l-19.35 30.32h38.68c5.74 0 10.36 4.57 10.36 10.25v105.6l219.52 43.7 55.12 1.54-1.13-72.69c-.17-11.3-13.58-24.7-13.58-24.7l-67.95-82.19S868.38 140 843.39 140z" opacity=".54" transform="translate(-240 -140)" />
+                            <path fill="#e5e5e5" d="M193.4 8.02c-18.93 0-29.8 11-40.35 27.04L86.83 139.54c-10.2 13.83-10.85 18.77.73 30.22l35.36 36.84c5.24 6.21 9.6 7.07 19.06 7.07l532.1-1.43c25.5-.07 28.48-13.89 27.99-28.52l-1.93-56.98c-.38-11.29-11.55-24.7-11.55-24.7l-67.96-82.18s-8.1-11.84-33.1-11.84z" />
+                            <g fill-rule="evenodd">
+                                <path fill="#ce7024" d="M450.5 239.66l-.45.96-1 .28H417.2l.53-3.77h31.88l.9.28.16.96zm6.9-7.37c-.81-.97-2.24-1.45-4.3-1.45h-41.8l-3.72 26.37h7.3l1.42-10.02h34.47c2.06 0 3.63-.48 4.72-1.45 1.1-.97 1.78-2.43 2.06-4.39l.65-4.67c.28-1.96 0-3.43-.8-4.4zm-57.7 7.37l-.45.96-1 .28h-31.87l.54-3.77h31.87l.9.28.17.96zm6.9-7.37c-.81-.97-2.25-1.45-4.3-1.45h-41.8l-3.73 26.37h7.32l1.4-10.02h34.47c2.06 0 3.63-.48 4.72-1.45 1.1-.97 1.78-2.43 2.06-4.39l.65-4.67c.28-1.96 0-3.43-.8-4.4zm145.37 7.37l-.44.96-1 .28h-32.04l.54-3.77h32.03l.9.28.16.96zm6.99-7.47c-.77-.9-2.17-1.35-4.17-1.35h-42.16l-3.73 26.37h7.3l1.42-10.05h31.72c1 0 1.44.5 1.33 1.54l-1.21 8.51h7.3l1.04-7.27.08-2.18-.54-1.8-1.33-1.25-2.3-.65c1.8-.12 3.15-.61 4-1.46a6.57 6.57 0 001.69-3.81l.3-2.3c.28-1.96.04-3.4-.74-4.3zm-49.85-1.35h-46.98l-3.73 26.38h46.99l.87-6.3h-39.67l.52-3.77h35.88l.87-6.25h-35.88l.55-3.76h39.69zm-163.9 26.38h7.3l3.74-26.38h-7.32zm-2-6.3h-39.14l2.86-20.08h-7.32l-3.73 26.38h46.47zm-51.7-10.02h-35.65l.52-3.76h39.47l.9-6.3h-46.76l-3.73 26.38h7.32l1.4-10.02h35.65z" />
+                                <path fill-opacity=".17" d="M360.5 230.84l-3.72 26.38h2.32l3.44-24.38h41.78c1.15 0 2.1.16 2.86.46a3.5 3.5 0 00-.58-1.01c-.81-.97-2.25-1.45-4.3-1.45zm50.82 0l-3.73 26.38h2.3l3.46-24.38h41.78c1.15 0 2.1.16 2.85.46a3.5 3.5 0 00-.58-1.01c-.8-.97-2.24-1.45-4.3-1.45zm101.3 0l-3.72 26.38h2.3l3.46-24.38h42.16c1.09 0 2 .14 2.72.41a3.4 3.4 0 00-.58-1.06c-.77-.9-2.17-1.35-4.17-1.35zm-262.63 0l-3.73 26.38h2.3l3.46-24.38h44.45l.3-2zm49.63 0l-3.73 26.38h2.3l3.45-24.38h5l.29-2zm49.32 0l-3.74 26.38h2.3l3.46-24.38h5l.29-2zm113.19 0l-3.74 26.38h2.3l3.47-24.38h44.67l.3-2zm-62.36 8.3l-.06.52-.46.96-1 .28h-31.87l2.03 2h31.88l.98-.28.46-.96.15-1.28-.17-.96-.9-.28zm50.9-.76l-.16 1.28-.46.96-1 .28h-29.54l-.3 2h31.89l1-.28.45-.96.15-1.28-.17-.96-2.03-2zm101.45 0l-.15 1.28-.43.96-1.01.28h-32.04l2.03 2h32.03l1-.28.45-.96.15-1.28-.15-.96-2.03-2zm-296.26 2.52l2.02 2h33.35l.28-2zm212.13 0l2.03 2h33.57l.28-2zm82.62 8.26l-1.15 8.06h2.3l.94-6.51c.1-1.03-2.07-2.82-2.07-2.82l.05.28v.37zm-84.03 1.76l2.03 2h37.38l.28-2zm-162.5 0l2.02 2h36.85l.27-2z" />
+                            </g>
+                        </svg>
+                        <div class="flipper__interface">
+                            <div class="flipper__screen">
+                                <div class="flipper__screen__container">
+                                    <!-- Yep, we need this hack, because chrome so fuck https://bugs.chromium.org/p/chromium/issues/detail?id=148499 -->
+                                    <svg class="flipper__screen__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 268 148">
+                                        <foreignObject width="268" height="148">
+                                            <div class="flipper-lcd">
+                                                <video muted autoplay></video>
+                                            </div>
+                                        </foreignObject>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flipper__interface__container">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="flipper__interface__svg" viewBox="0 0 520 162">
+                                    <g transform="translate(-408.34 -159.82)">
+                                        <path fill="#e4e4e4" d="M789.77 159.82c-44.8 0-81.11 34.32-81.11 76.66 0 42.34 36.31 76.66 81.11 76.66s107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.15-67.52-34.15z" paint-order="stroke fill markers" />
+                                        <path fill="#d9d8d6" stroke="#c6c5c3" stroke-linejoin="round" stroke-width="5.11" d="M789.77 162.92c-44.8 0-81.11 34.33-81.11 76.67s36.31 76.66 81.11 76.66 107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.16-67.52-34.16z" paint-order="stroke fill markers" />
+                                        <path fill="#e4e4e4" d="M789.77 164.58c-44.8 0-81.11 34.33-81.11 76.67s36.31 76.66 81.11 76.66 107.33-.18 107.33-.18a27.44 27.16 0 0027.44-27.15 27.44 27.16 0 00-7.19-18.32c-1.95-2.33-51.64-61.59-60.06-73.52-14.54-20.59-39.36-34.16-67.52-34.16z" paint-order="stroke fill markers" />
+                                        <ellipse cx="789.77" cy="240.71" fill="#9f582e" stroke="#9f582e" stroke-linejoin="round" stroke-width="3.5" paint-order="stroke fill markers" rx="77.59" ry="73.33" />
+                                        <path fill="#e8853e" d="M789.77 167.6a76.71 72.5 0 00-76.71 72.5 76.71 72.5 0 0076.71 72.51 76.71 72.5 0 0076.72-72.5 76.71 72.5 0 00-76.72-72.5zm0 46.35a25.96 24.53 0 0125.96 24.53 25.96 24.53 0 01-25.96 24.54 25.96 24.53 0 01-25.95-24.54 25.96 24.53 0 0125.95-24.53z" paint-order="stroke fill markers" />
+                                        <path fill="#e8853e" d="M806.24 262.35a31.45 31.45 0 01-29.48 1.85 30.65 30.65 0 01-4.06-2.25l-30.34 30.03a75 75 0 0043.57 16.52 77.04 77.04 0 0032.74-5.55 73.27 73.27 0 0018.53-10.96l-30.35-30.04z" paint-order="stroke fill markers" />
+                                        <path fill="#9f582e" fill-opacity=".5" d="M789.77 302.8c.54 0 1.03-.29 1.3-.74L803.25 282c.6-1-.12-2.28-1.3-2.28H777.6a1.5 1.5 0 00-1.3 2.28l12.16 20.06c.27.45.77.73 1.3.73z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" />
+                                        <path fill="#e8853e" d="M802.3 280.27c.07.13.08.25-.01.41l-12.17 20.06c-.07.13-.2.2-.35.2a.41.41 0 01-.36-.2l-12.16-20.06c-.2-.32-.02-.62.36-.62h24.32c.2 0 .29.08.36.2z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" />
+                                        <path fill="#e8853e" d="M789.1 171.62c-15.7.13-31.4 5.16-43.99 14.5l28.59 28.28a31.27 31.27 0 0132.15 0l28.6-28.3a75.23 75.23 0 00-44.14-14.48z" paint-order="stroke fill markers" />
+                                        <path fill="#9f582e" fill-opacity=".5" d="M789.77 177.43c.54 0 1.03.28 1.3.73l12.17 20.06c.6 1-.12 2.28-1.3 2.28H777.6a1.5 1.5 0 01-1.3-2.28l12.16-20.06c.27-.45.77-.73 1.3-.73z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" />
+                                        <path fill="#e8853e" d="M802.3 198.44a.37.37 0 000-.42l-12.17-20.06a.41.41 0 00-.36-.2.41.41 0 00-.35.2l-12.17 20.06c-.2.32-.02.62.36.62h24.33c.19 0 .28-.08.36-.2z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        <path fill="#e8853e" d="M813.76 221.33a27.54 27.54 0 014.9 24.94 27.96 27.96 0 01-4.22 8.44l30.4 30.08a67.9 67.9 0 0011.98-18.3 64.94 64.94 0 003.78-41.65 67.37 67.37 0 00-18.16-31.9z" paint-order="stroke fill markers" />
+                                        <path fill="#9f582e" fill-opacity=".5" d="M853.12 240.11a1.5 1.5 0 00-.74-1.3l-20.27-12.03c-1.01-.6-2.3.13-2.3 1.3v24.06c0 1.17 1.29 1.9 2.3 1.3l20.27-12.04c.46-.27.74-.76.74-1.29z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        <path fill="#e8853e" d="M831.12 226.96a.4.4 0 01.42 0L851.81 239c.13.08.2.2.2.35a.4.4 0 01-.2.36l-20.27 12.03c-.32.2-.63.02-.63-.35v-24.07c0-.19.08-.29.21-.36z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        <path fill="#e8853e" d="M736.58 193.46a66.46 66.46 0 00-19.46 46.41 65.86 65.86 0 0012.74 38.97 68.52 68.52 0 004.85 5.95l30.4-30.08a27.3 27.3 0 01-4.64-22.35c.93-4 2.74-7.8 5.32-11.03l-28.69-28.39z" paint-order="stroke fill markers" />
+                                        <path fill="#9f582e" fill-opacity=".5" d="M726.42 240.11c0-.53.28-1.02.74-1.3l20.27-12.03c1.02-.6 2.3.13 2.3 1.3v24.06c0 1.17-1.28 1.9-2.3 1.3l-20.27-12.04a1.5 1.5 0 01-.74-1.29z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        <path fill="#e8853e" d="M748.42 226.96a.38.38 0 00-.42 0L727.73 239a.4.4 0 00-.2.35c0 .15.08.28.2.36L748 251.74c.33.2.63.02.63-.35v-24.07a.36.36 0 00-.2-.36z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        <ellipse cx="789.77" cy="239.89" fill="#804a2a" paint-order="stroke fill markers" rx="21.78" ry="20.59" />
+                                        <g paint-order="stroke fill markers">
+                                            <ellipse cx="789.77" cy="236.43" fill="#e89e3e" rx="21.78" ry="20.59" />
+                                            <ellipse cx="789.77" cy="237.68" fill="#e8853e" rx="21.78" ry="20.59" />
+                                        </g>
+                                        <g paint-order="stroke fill markers">
+                                            <ellipse cx="715.16" cy="312.7" fill="#c6c5c3" rx="5.39" ry="5.33" />
+                                            <ellipse cx="715.16" cy="312.7" fill="#dcfb44" rx="4.57" ry="4.53" />
+                                            <path fill-opacity=".5" d="M715.16 308.18a4.57 4.53 0 00-4.57 4.52 4.57 4.53 0 00.01.38 4.57 4.53 0 014.56-4.15 4.57 4.53 0 014.56 4.15 4.57 4.53 0 00.02-.38 4.57 4.53 0 00-4.58-4.52z" />
+                                        </g>
+                                        <g paint-order="stroke fill markers">
+                                            <path fill="#c6c5c3" d="M429.77 160.44c-10.6 0-19.43 8.74-19.43 19.23V302.2c0 10.5 8.82 19.23 19.43 19.23h244.38c10.6 0 19.43-8.73 19.43-19.23V179.67c0-10.5-8.82-19.23-19.43-19.23zm0 9.88h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                            <path fill="#d9d8d6" d="M429.77 163.8c-9.27 0-16.95 7.6-16.95 16.77V303.1c0 9.17 7.68 16.77 16.95 16.77h244.38c9.27 0 16.95-7.6 16.95-16.77V180.57c0-9.17-7.68-16.77-16.95-16.77zm0 6.52h244.38c5.74 0 10.36 4.57 10.36 10.25V305.1c0 5.68-4.62 10.25-10.36 10.25H429.77a10.28 10.28 0 01-10.36-10.25V180.57c0-5.68 4.62-10.25 10.36-10.25z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                            <path fill-opacity=".2" d="M429.77 170.32a10.29 10.29 0 00-10.36 10.26V305.1c0 5.68 4.62 10.26 10.36 10.26h244.38c5.74 0 10.36-4.58 10.36-10.26V180.58c0-5.68-4.62-10.26-10.36-10.26zm242.26 4c1.17 0 2.34 0 3.5.13 3.8.55 6.87 4 6.94 7.78.03 39.24 0 78.47.01 117.7-.06 2.19.14 4.39-.11 6.56a8.3 8.3 0 01-7.92 6.85c-79.65.02-159.3 0-238.96.01-2.33-.06-4.69.12-7.02-.1a8.28 8.28 0 01-7.02-7.8c-.03-39.2 0-78.4-.01-117.6.06-2.22-.13-4.45.12-6.65a8.3 8.3 0 017.76-6.85l.3-.01h238.9c1.17.02 2.34 0 3.51-.02z" />
+                                        </g>
+                                        <g>
+                                            <ellipse cx="897.1" cy="289.55" fill="#9f582e" paint-order="stroke fill markers" rx="25.49" ry="25.22" />
+                                            <path fill="#e89e3e" d="M920.28 288.78c0 12.67-10.38 22.94-23.18 22.94-12.8 0-23.19-10.27-23.19-22.94 0-12.67 10.38-22.94 23.19-22.94 12.8 0 23.18 10.27 23.18 22.94z" paint-order="stroke fill markers" />
+                                            <path fill="#e8853e" d="M920.28 288.78c0 12.67-10.38 22.94-23.18 22.94-12.8 0-23.19-10.27-23.19-22.94 0-12.67 10.38-21.42 23.19-21.42 12.8 0 23.18 8.75 23.18 21.42z" paint-order="stroke fill markers" />
+                                            <path fill="#9f582e" fill-opacity=".8" d="M892.77 275.25c-.3 0-.58.09-.83.25l-9.12 6.02c-.9.6-.9 1.9 0 2.5l9.12 6.02a1.52 1.52 0 002.37-1.25v-4.01h8.1a5.49 5.49 0 015.58 5.51c0 3.1-2.45 5.52-5.57 5.52h-7.6c-1.12 0-2.03.9-2.03 2a2.02 2.02 0 002.07 2h7.56a9.6 9.6 0 009.63-9.52 9.6 9.6 0 00-9.63-9.53h-8.11v-4c0-.84-.7-1.52-1.54-1.51z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                            <path fill="#e8853e" fill-opacity=".7" d="M893.17 276.65a.5.5 0 00-.27.08l-9.12 6.02c-.32.2-.32.6 0 .8l9.12 6.02c.37.25.76.04.76-.4v-4.01a1.03 1.02 0 011.03-1.02h8.11c3.67 0 6.6 2.9 6.6 6.53a6.55 6.55 0 01-6.6 6.54h-7.6c-.56 0-1 .43-1 .98 0 .56.44.99 1 .99a1.03 1.02 0 01.01 0h.03a1.03 1.02 0 01.01 0h7.55c4.74 0 8.6-3.82 8.6-8.5 0-4.7-3.86-8.52-8.6-8.52h-8.1a1.03 1.02 0 01-1.04-1.02v-4c0-.29-.2-.5-.49-.5z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="console">
+            <h1 class="console__title">Live Log</h1>
+            <div class="console__actionbar">
+                <div class="filters">
+                    <h2 class="filters__title">Filter:</h2>
+                    <div class="filters__checkbox">
+                        <input type="checkbox" id="filter-uart">
+                        <label for="filter-uart" class="label--uart">UART</label>
+                    </div>
+                    <div class="filters__checkbox">
+                        <input type="checkbox" id="filter-dmesg">
+                        <label for="filter-dmesg" class="label--dmesg">dmesg</label>
+                    </div>
+                    <div class="filters__checkbox">
+                        <input type="checkbox" id="filter-st-link">
+                        <label for="filter-st-link" class="label--st-link">ST-Link</label>
+                    </div>
+                    <div class="filters__checkbox">
+                        <input type="checkbox" id="filter-input">
+                        <label for="filter-input" class="label--input">Input</label>
+                    </div>
+                </div>
+                <div class="console__actionbar__separator"></div>
+                <button id="fullscreen-toggle" class="fullscreen-toggle"></button>
+            </div>
+            <div class="console__body">
+                <!-- <textarea class="console__body__textarea"></textarea> -->
+                <div class="messages">
+                    <div class="message message--uart">uart: [menu view] start component 20006AF8 (size 10)</div>
+                    <div class="message message--uart">uart: safety check at 1</div>
+                    <div class="message message--event">["Button down click handler"]</div>
+                    <div class="message message--input">input: ok</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--event">["Button ock click handler"]</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--input">input: back</div>
+                    <div class="message message--uart">uart: [menu view] start component 20006AF8 (size 10)</div>
+                    <div class="message message--uart">uart: safety check at 1</div>
+                    <div class="message message--event">["Button down click handler"]</div>
+                    <div class="message message--input">input: ok</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--event">["Button ock click handler"]</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--input">input: back</div>
+                    <div class="message message--uart">uart: [menu view] start component 20006AF8 (size 10)</div>
+                    <div class="message message--uart">uart: safety check at 1</div>
+                    <div class="message message--event">["Button down click handler"]</div>
+                    <div class="message message--input">input: ok</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--event">["Button ock click handler"]</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--input">input: back</div>
+                    <div class="message message--uart">uart: [menu view] start component 20006AF8 (size 10)</div>
+                    <div class="message message--uart">uart: safety check at 1</div>
+                    <div class="message message--event">["Button down click handler"]</div>
+                    <div class="message message--input">input: ok</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--event">["Button ock click handler"]</div>
+                    <div class="message message--uart">uart: safety check at 4</div>
+                    <div class="message message--input">input: back</div>
+                </div>
+            </div>
+            <div class="console__input">
+                <input class="console__input__input-text" type="text" name="console-input" placeholder="> Type here">
+                <button class="console__input__input-button">Send</button>
+            </div>
+        </section>
+    </main>
+    <script>
+    // API endpoints
+    let videoUrl = 'https://lab.flipperzero.one:8080/live?port=1985&app=myapp&stream=randomname';
+
+    // Fullscreen
+    const fullscreenToggle = document.querySelector('#fullscreen-toggle');
+    fullscreenToggle.addEventListener('click', function() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    })
+
+    document.addEventListener('fullscreenchange', (event) => {
+        const className = 'fullscreen-toggle--active';
+        if (document.fullscreenElement) {
+            fullscreenToggle.classList.add(className);
+        } else {
+            fullscreenToggle.classList.remove(className);
+        }
+    });
+
+    // Display
+    const reset = function() {
+        if (typeof player !== "undefined") {
+            if (player != null) {
+                player.unload();
+                player.detachMediaElement();
+                player.destroy();
+                player = null;
+            }
+        }
+
+        player = flvjs.createPlayer({
+            type: 'flv',
+            url: videoUrl,
+        }, {
+            enableWorker: false,
+            lazyLoadMaxDuration: 3 * 60,
+            seekType: 'range',
+        });
+
+        player.attachMediaElement(document.querySelector('.flipper-lcd video'));
+        player.load();
+        player.play();
+    }
+
+    reset();
+    document.addEventListener('visibilitychange', reset);
+    </script>
+</body>
+
+</html>
